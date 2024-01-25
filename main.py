@@ -8,7 +8,7 @@ app_reclamation.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app_reclamation)
 
 # Your Eureka server URL
-eureka_server = "http://localhost:8081/eureka"
+eureka_server = "http://localhost:8099/eureka"
 
 # Register this service to eureka server
 eureka_client.init(eureka_server=eureka_server,
@@ -56,6 +56,7 @@ instance = {
         'port': 5050,
         # Add other relevant information as needed
     }
+
 if __name__ == '__main__':
     eureka_client.register(eureka_server=eureka_server,instance=instance)
     app_reclamation.run(host='0.0.0.0', port=5050)

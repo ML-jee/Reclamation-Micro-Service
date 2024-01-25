@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  mysql-db:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: db-related-entities
+      MYSQL_USER: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+  
+  reclamation-app:
+    build: .
+    ports:
+      - "5051:5050"
+    depends_on:
+      - mysql-db
+    restart:
+      always
+    environment:
+      DATABASE_URI: 'mysql+mysqlconnector://root:@mysql-db:3306/db-related-entities'
+
